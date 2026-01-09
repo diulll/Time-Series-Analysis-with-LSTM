@@ -7,6 +7,8 @@ from sklearn.preprocessing import MinMaxScaler
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import LSTM, Dense, Input
 
+# Updated: 2026-01-09
+
 diabetes = load_diabetes()
 
 # Gunakan target sebagai runtun waktu
