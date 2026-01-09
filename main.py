@@ -6,6 +6,8 @@ from sklearn.preprocessing import MinMaxScaler
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import LSTM, Dense, Input
 
+# Updated: 2026-01-09
+
 data = np.array([
 120,128,136,140,145,150,158,162,170,175,
 180,185,190,194,200,205,210,215,220,225,
