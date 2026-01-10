@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 from sklearn.datasets import load_breast_cancer
 from sklearn.preprocessing import MinMaxScaler
 from tensorflow.keras.models import Sequential
@@ -85,3 +86,20 @@ pred_scaled = model.predict(last_window)
 prediction = scaler.inverse_transform(pred_scaled)
 
 print("Prediksi 1 periode ke depan (mean radius):", prediction[0][0])
+
+# =============================
+# 9. Visualisasi Hasil (Test Set)
+# =============================
+y_pred_test = model.predict(X_test)
+y_pred_inv = scaler.inverse_transform(y_pred_test)
+y_test_inv = scaler.inverse_transform(y_test.reshape(-1, 1))
+
+plt.figure(figsize=(10, 6))
+plt.plot(y_test_inv, label='Data Aktual (Test)', marker='o')
+plt.plot(y_pred_inv, label='Prediksi LSTM (Test)', marker='x')
+plt.title("Prediksi Mean Radius - Data Test")
+plt.xlabel("Waktu (Sample Index)")
+plt.ylabel("Mean Radius")
+plt.legend()
+plt.grid()
+plt.show()
