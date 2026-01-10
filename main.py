@@ -20,7 +20,7 @@ plt.title("Data Penjualan (40 Periode)")
 plt.xlabel("Waktu")
 plt.ylabel("Nilai")
 plt.grid()
-plt.show()
+# plt.show()
 scaler = MinMaxScaler(feature_range=(0,1))
 data_scaled = scaler.fit_transform(data.reshape(-1,1))
 #Gunakan window = 3
@@ -51,28 +51,28 @@ history = model.fit(
     batch_size=1,
     verbose=1
 )
-y_pred = model(X, training=False)
 
-forecast = model(last_window, training=False)
+# Prediksi seluruh data latih
+y_pred = model.predict(X)
+y_pred_inv = scaler.inverse_transform(y_pred)
+y_actual_inv = scaler.inverse_transform(y.reshape(-1, 1))
 
-# Inverse scaling
-y_pred_inv = scaler.inverse_transform(y_pred.numpy())
-forecast_inv = scaler.inverse_transform(forecast.numpy())
-
-
-#Visualisasi prediksi
+# Visualisasi prediksi
+plt.figure()
 plt.plot(y_actual_inv, label="Data Aktual")
 plt.plot(y_pred_inv, label="Prediksi LSTM")
-plt.title("Hasil Prediksi LSTM")
+plt.title("Hasil Prediksi LSTM - Data Dummy")
 plt.xlabel("Waktu")
 plt.ylabel("Nilai")
 plt.legend()
 plt.grid()
 plt.show()
+
+# Prediksi 1 periode ke depan
 last_window = data_scaled[-3:]
-last_window = last_window.reshape((1,3,1))
+last_window = last_window.reshape((1, 3, 1))
 forecast = model.predict(last_window)
 forecast_inv = scaler.inverse_transform(forecast)
 
-print("Prediksi periode ke-41:", forecast_inv[0][0])
+print("Prediksi periode berikutnya:", forecast_inv[0][0])
 
