@@ -23,7 +23,7 @@ plt.title("Dataset Diabetes (40 Observasi Pertama)")
 plt.xlabel("Waktu")
 plt.ylabel("Nilai Target")
 plt.grid()
-plt.show()
+# plt.show() # Dikomentari agar program langsung lanjut ke proses training tanpa harus menutup jendela grafik dulu
 scaler = MinMaxScaler(feature_range=(0,1))
 data_scaled = scaler.fit_transform(data.reshape(-1,1))
 #Gunakan window = 3
